@@ -1,5 +1,0 @@
-bzimage - 
-bzroot
-bzroot-gui
-bzmodules - /lib/firmware
-bzfirmware - /root/unraid_version
