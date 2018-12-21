@@ -8,7 +8,7 @@ base_folder="/tmp/" #all files we be stored in /dvb-build/ subdirectory, use abs
 mksquashfs_download="https://github.com/colsw/urdvb/raw/master/mksquashfs"
 unzip_download="https://github.com/colsw/urdvb/raw/master/unzip"
 
-kernel_full="4.18.20"
+kernel_full="4.18.20" #only for testing
 #kernel_full=$(uname -r | grep -Eo '^[0-9\.]+')
 kernel_major=$(echo $kernel_full | grep -Eo '^[0-9]+')
 kernel_download_root="https://www.kernel.org/pub/linux/kernel"
@@ -21,7 +21,7 @@ libelec_version="$(curl -w "%{url_effective}" -ILs -S $libelec_getver -o /dev/nu
 libelec_download="${libelec_download_root}/${libelec_version}.tar.gz"
 
 unraid_version_file="/etc/unraid-version"
-unraid_version="6.6.6"
+unraid_version="6.6.6" #only for testing
 #unraid_version=$(cat ${unraid_version_file} | grep -Eo '[0-9\.]+')
 unraid_download="https://s3.amazonaws.com/dnld.lime-technology.com/stable/unRAIDServer-${unraid_version}-x86_64.zip"
 
@@ -33,6 +33,7 @@ mkdir "${rootpath}/dl"
 mkdir "${rootpath}/kernel"
 mkdir "${rootpath}/libelec"
 mkdir "${rootpath}/unraid"
+mkdir "${rootpath}/compile"
 
 #Check free space before downloading anything
 freespace=$(df -k ${rootpath} | awk '{print $4}' | tail -1)
@@ -73,3 +74,5 @@ tar -C "${rootpath}/kernel" --strip-components=1 -xf "${rootpath}/dl/kernel_late
 tar -C "${rootpath}/libelec" --strip-components=1 -xf "${rootpath}/dl/libelec_latest.tar.gz"
 ${rootpath}/unzip -qo "${rootpath}/dl/unraid_latest.zip" -d "${rootpath}/unraid"
 echo "...Extraction complete!"
+
+#Begin Compile
