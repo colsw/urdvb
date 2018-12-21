@@ -75,4 +75,16 @@ tar -C "${rootpath}/libelec" --strip-components=1 -xf "${rootpath}/dl/libelec_la
 ${rootpath}/unzip -qo "${rootpath}/dl/unraid_latest.zip" -d "${rootpath}/unraid"
 echo "...Extraction complete!"
 
+#Other Installs
+
+
 #Begin Compile
+#bzroot and bzroot-gui are unchanged for LibreELEC, no need to copy them?
+#cp "${rootpath}/unraid/bzroot" "${rootpath}/compile"
+#cp "${rootpath}/unraid/bzroot-gui" "${rootpath}/compile"
+
+cp "${rootpath}/libelec/firmware/*" "/lib/firmware/"
+${rootpath}/mksquashfs "/lib/firmware" "${rootpath}/compile/bzfirmware" -noappend
+${rootpath}/mksquashfs "/lib/modules/$(uname -r)/" "${rootpath}/compile/bzmodules" -keep-as-directory -noappend
+
+#BZIMAGE
